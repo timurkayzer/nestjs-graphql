@@ -1,12 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { Field, ID, Int, ObjectType } from "@nestjs/graphql";
+import { Field, Int, ObjectType } from "@nestjs/graphql";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @ObjectType()
 @Entity()
 export class Pet {
     @PrimaryGeneratedColumn()
-    @Field(type => Int)
+    @Field()
     id: number;
     @Column()
     @Field()
