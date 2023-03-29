@@ -6,6 +6,7 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PetsModule } from './pets/pets.module';
+import { OwnersModule } from './owners/owners.module';
 import typeOrmConfig from './typeormconfig';
 
 
@@ -16,7 +17,8 @@ import typeOrmConfig from './typeormconfig';
       driver: ApolloDriver
     }),
     TypeOrmModule.forRoot(typeOrmConfig),
-    PetsModule
+    PetsModule,
+    OwnersModule
   ],
   controllers: [AppController],
   providers: [AppService],
