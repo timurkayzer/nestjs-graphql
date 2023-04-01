@@ -12,7 +12,8 @@ type Pet {
   id: Float!
   name: String!
   breed: String
-  owner: Owner
+  ownerId: Float!
+  owner: Owner!
 }
 
 type Query {
@@ -32,6 +33,7 @@ type Mutation {
 input CreatePetInput {
   name: String!
   breed: String
+  ownerId: Float
 }
 
 input CreateOwnerInput {

@@ -4,6 +4,7 @@ import { UpdateOwnerInput } from './dto/update-owner.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Owner } from './entities/owner.entity';
 import { Repository } from 'typeorm';
+import { Pet } from 'src/pets/pet.entity';
 
 @Injectable()
 export class OwnersService {
@@ -27,6 +28,15 @@ export class OwnersService {
 
   update(id: number, updateOwnerInput: UpdateOwnerInput) {
     return this.ownerRepository.update({ id }, updateOwnerInput);
+  }
+
+  async getPets(ownerId: number): Promise<Pet[]> {
+    const owner = await this.ownerRepository.findOne({
+      relations: ['pets'],
+      where: { id: ownerId }
+    });
+
+    return owner.pets;
   }
 
   remove(id: number) {

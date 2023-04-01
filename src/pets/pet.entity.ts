@@ -21,7 +21,11 @@ export class Pet {
     })
     breed?: string;
 
+    @Column()
+    @Field()
+    ownerId: number;
+
     @ManyToOne(() => Owner, owner => owner.pets)
-    @Field(() => Owner, { nullable: true })
-    owner?: Owner;
+    @Field(() => Owner)
+    owner: Owner;
 }
