@@ -9,16 +9,15 @@ import { PetsModule } from './pets/pets.module';
 import { OwnersModule } from './owners/owners.module';
 import typeOrmConfig from './typeormconfig';
 
-
 @Module({
   imports: [
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      driver: ApolloDriver
+      driver: ApolloDriver,
     }),
     TypeOrmModule.forRoot(typeOrmConfig),
     PetsModule,
-    OwnersModule
+    OwnersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

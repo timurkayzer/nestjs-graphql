@@ -13,7 +13,7 @@ export class Owner {
   @Column()
   name: string;
 
-  @OneToMany(() => Pet, pet => pet.owner)
+  @OneToMany(() => Pet, (pet) => pet.owner)
   @Field(() => [Pet], { nullable: true })
   pets?: Pet[];
 }

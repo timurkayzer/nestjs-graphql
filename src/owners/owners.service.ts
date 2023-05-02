@@ -8,10 +8,9 @@ import { Pet } from 'src/pets/pet.entity';
 
 @Injectable()
 export class OwnersService {
-
   constructor(
-    @InjectRepository(Owner) private ownerRepository: Repository<Owner>
-  ) { }
+    @InjectRepository(Owner) private ownerRepository: Repository<Owner>,
+  ) {}
 
   create(createOwnerInput: CreateOwnerInput) {
     const newOwner = this.ownerRepository.create(createOwnerInput);
@@ -33,7 +32,7 @@ export class OwnersService {
   async getPets(ownerId: number): Promise<Pet[]> {
     const owner = await this.ownerRepository.findOne({
       relations: ['pets'],
-      where: { id: ownerId }
+      where: { id: ownerId },
     });
 
     return owner.pets;

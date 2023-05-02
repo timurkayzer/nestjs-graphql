@@ -1,31 +1,31 @@
-import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { Owner } from "src/owners/entities/owner.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Owner } from 'src/owners/entities/owner.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
 @Entity()
 export class Pet {
-    @PrimaryGeneratedColumn()
-    @Field()
-    id: number;
+  @PrimaryGeneratedColumn()
+  @Field()
+  id: number;
 
-    @Column()
-    @Field()
-    name: string;
+  @Column()
+  @Field()
+  name: string;
 
-    @Column({
-        nullable: true
-    })
-    @Field({
-        nullable: true
-    })
-    breed?: string;
+  @Column({
+    nullable: true,
+  })
+  @Field({
+    nullable: true,
+  })
+  breed?: string;
 
-    @Column()
-    @Field()
-    ownerId: number;
+  @Column()
+  @Field()
+  ownerId: number;
 
-    @ManyToOne(() => Owner, owner => owner.pets)
-    @Field(() => Owner)
-    owner: Owner;
+  @ManyToOne(() => Owner, (owner) => owner.pets)
+  @Field(() => Owner)
+  owner: Owner;
 }

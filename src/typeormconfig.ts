@@ -4,10 +4,10 @@ import { Pet } from './pets/pet.entity';
 import { Owner } from './owners/entities/owner.entity';
 
 const typeOrmConfig: DataSourceOptions = {
-    type: 'sqlite',
-    database: ':memory:',
-    entities: [Pet, Owner],
+  type: 'sqlite',
+  database: ':memory:',
+  entities: [Pet, Owner],
 
-    synchronize: true,
+  synchronize: true,
 };
 export default typeOrmConfig;

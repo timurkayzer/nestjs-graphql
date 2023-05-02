@@ -7,32 +7,27 @@ import { Pet } from './pet.entity';
 
 @Injectable()
 export class PetsService {
+  constructor(@InjectRepository(Pet) private petRepository: Repository<Pet>) {}
 
-    constructor(
-        @InjectRepository(Pet) private petRepository: Repository<Pet>
-    ) {
+  createPet(createPetInput: CreatePetInput): Promise<Pet> {
+    const newPet = this.petRepository.create(createPetInput);
+    return this.petRepository.save(newPet);
+  }
 
-    }
+  async getOwner(ownerId: number): Promise<Owner> {
+    const pet = await this.petRepository.findOne({
+      relations: ['owner'],
+      where: { ownerId },
+    });
 
-    createPet(createPetInput: CreatePetInput): Promise<Pet> {
-        const newPet = this.petRepository.create(createPetInput);
-        return this.petRepository.save(newPet);
-    }
+    return pet.owner;
+  }
 
-    async getOwner(ownerId: number): Promise<Owner> {
-        const pet = await this.petRepository.findOne({
-            relations: ['owner'],
-            where: { ownerId }
-        });
+  async findAll(): Promise<Pet[]> {
+    return this.petRepository.find();
+  }
 
-        return pet.owner;
-    }
-
-    async findAll(): Promise<Pet[]> {
-        return this.petRepository.find();
-    }
-
-    async findById(id: number): Promise<Pet> {
-        return this.petRepository.findOneOrFail({ where: { id } });
-    }
+  async findById(id: number): Promise<Pet> {
+    return this.petRepository.findOneOrFail({ where: { id } });
+  }
 }
